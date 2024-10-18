@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTI Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        table, th, td { border: 1px solid black; padding: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>CTI Threat Dashboard</h2>
+        <button onclick="newReport()">Share a Threat</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date/Time</th>
+                    <th>Threat Name</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="threatTable">
+                <!-- Threat reports will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function newReport() {
+            // Function to add new threat (simulate with a prompt for now)
+            let threatName = prompt("Enter Threat Name");
+            let description = prompt("Enter Threat Description");
+            let status = "Ongoing";
+
+            let table = document.getElementById("threatTable");
+            let row = table.insertRow();
+
+            let dateTimeCell = row.insertCell(0);
+            let threatCell = row.insertCell(1);
+            let descCell = row.insertCell(2);
+            let statusCell = row.insertCell(3);
+            let actionCell = row.insertCell(4);
+
+            dateTimeCell.innerHTML = new Date().toLocaleString();
+            threatCell.innerHTML = threatName;
+            descCell.innerHTML = description;
+            statusCell.innerHTML = status;
+            actionCell.innerHTML = '<button onclick="resolveThreat(this)">Resolve</button>';
+        }
+
+        function resolveThreat(btn) {
+            let row = btn.parentElement.parentElement;
+            row.cells[3].innerHTML = "Resolved";
+        }
+    </script>
+</body>
+</html>
